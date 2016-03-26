@@ -23,13 +23,52 @@ struct node{
 };
 
 
+void inorder_wrapper(node * root, int * arr, int * pos){
+	if (root == NULL)
+		return;
+	inorder_wrapper(root->left, arr, pos);
+	arr[(*pos)++] = root->data;
+	inorder_wrapper(root->right, arr, pos);
+}
+
+void preorder_wrapper(node * root, int * arr, int * pos){
+	if (root == NULL)
+		return;
+	arr[(*pos)++] = root->data;
+	preorder_wrapper(root->left, arr, pos);
+	preorder_wrapper(root->right, arr, pos);
+}
+
+void postorder_wrapper(node * root, int * arr, int * pos){
+	if (root == NULL)
+		return;
+	postorder_wrapper(root->left, arr, pos);
+	postorder_wrapper(root->right, arr, pos);
+	arr[(*pos)++] = root->data;
+}
+
 void inorder(struct node *root, int *arr){
-	
+	if (root == NULL || arr == NULL){
+		arr = NULL;
+		return;
+	}
+	int pos = 0;
+	inorder_wrapper(root, arr, &pos);
 }
 void preorder(struct node *root, int *arr){
-	
+	if (root == NULL || arr == NULL){
+		arr = NULL;
+		return;
+	}
+	int pos = 0;
+	preorder_wrapper(root, arr, &pos);
 }
 void postorder(struct node *root, int *arr){
-	
+	if (root == NULL || arr == NULL){
+		arr = NULL;
+		return;
+	}
+	int pos = 0;
+	postorder_wrapper(root, arr, &pos);
 }
 

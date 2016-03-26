@@ -40,17 +40,36 @@ struct node{
 	struct node *right;
 };
 
-
 int get_height(struct node *root){
-
-	return 0;
+	if (root == NULL)
+		return 0;
+	else{
+		int LHeight = get_height(root->left);
+		int RHeight = get_height(root->right);
+		//Expanding the tree with larger height...
+		return LHeight > RHeight ? LHeight + 1 : RHeight + 1;
+	}
+}
+int sum_mapper(node * root, char dir){
+	if (root == NULL)
+		return 0;
+	if (dir == 'l'){
+		return root->data + sum_mapper(root->left, 'l');
+	}
+	else{
+		return root->data + sum_mapper(root->right, 'r');
+	}
 }
 
 int get_left_subtree_sum(struct node *root){
-	return 0;
+	if (root == NULL)
+		return 0;
+	return sum_mapper(root->left, 'l');
 }
 
 int get_right_subtree_sum(struct node *root){
-	return 0;
+	if (root == NULL)
+		return 0;
+	return sum_mapper(root->right, 'r');
 }
 
