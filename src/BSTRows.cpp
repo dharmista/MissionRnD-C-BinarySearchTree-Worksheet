@@ -29,9 +29,42 @@ struct node{
 	struct node *right;
 };
 
+int heightOfTree(node * root){
+	if (root == NULL)
+		return 0;
+	else{
+		int LHeight = heightOfTree(root->left);
+		int RHeight = heightOfTree(root->right);
+		//Expanding the tree with larger height...
+		return LHeight > RHeight ? LHeight + 1 : RHeight + 1;
+	}
+}
 
+void elementsInLevel(node * root, int level, int * arr, int * pos){
+	if (root == NULL)
+		return;
+	if (level == 1)
+		arr[(*pos)++] = root->data;
+	else
+	{
+		elementsInLevel(root->right, level - 1, arr, pos);
+		elementsInLevel(root->left, level - 1, arr, pos);
+	}
+}
+
+void gen_array(node * root, int * arr){
+	int h = heightOfTree(root);
+	int pos = 0;
+	for (int i = 1; i <= h; i++){
+		elementsInLevel(root, i, arr, &pos);
+	}
+}
 
 int* BSTRighttoLeftRows(struct node* root)
 {
-    return NULL;
+	if (root == NULL)
+		return NULL;
+	int * arr = (int *)malloc(sizeof(int)* 20);
+	gen_array(root, arr);
+	return arr;
 }
