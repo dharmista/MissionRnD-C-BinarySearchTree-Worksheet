@@ -46,7 +46,7 @@ void elementsInLevel(node * root, int level, int * arr, int * pos){
 	if (level == 1)
 		arr[(*pos)++] = root->data;
 	else
-	{
+	{   //Reducing the level in order to reach the leaf node to trace the elements in level
 		elementsInLevel(root->right, level - 1, arr, pos);
 		elementsInLevel(root->left, level - 1, arr, pos);
 	}
