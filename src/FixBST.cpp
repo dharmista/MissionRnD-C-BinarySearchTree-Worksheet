@@ -32,6 +32,7 @@ struct node{
 	struct node *right;
 };
 
+//Fixes based on sorting of inordered elements in live checking without creating an new array.
 void inorder_prev(node * root, node ** k, node ** n1, node ** n2){
 	if (root == NULL)
 		return;
